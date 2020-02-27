@@ -1,9 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {motion} from 'framer-motion'
 import DragPage from '../components/DragPage'
 import AddHabitForm from '../components/AddHabitForm'
 import './HomePage.css'
 
 function HomePage(props){
+
+  const onTapStart = () => {
+    let dateClickStart = Date.now()
+    const checkTime = setInterval(() => {
+      if(Date.now() - dateClickStart > 1000){
+        window.alert('long press')
+        return clearInterval(checkTime)
+      }
+    }, 100)
+  }
 
   let habits = [
     {
@@ -21,11 +32,11 @@ function HomePage(props){
   ]
 
   const habitsArr = habits.map((habit, index) => {
-    return <div key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
+    return <motion.div onTapStart={onTapStart} whileTap={{scale:1.1}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
       <p>{habit.icon}</p>
       <p>{habit.habit}</p>
       <p>{habit.done}</p>
-    </div>
+    </motion.div>
   })
 
   return(
