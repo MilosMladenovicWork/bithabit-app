@@ -11,7 +11,7 @@ function App() {
       <Header/>
       <DragPage 
         style={{
-          top:"72.5vh"
+          top:"67.5vh"
         }}
       >
         <p style={{borderTop:"3px solid white",paddingTop:"10px"}}>
@@ -21,7 +21,7 @@ function App() {
       </DragPage>
       <DragPage 
         style={{
-          top:"85vh",
+          top:"80vh",
           backgroundColor:"#052137"
         }}
       >
