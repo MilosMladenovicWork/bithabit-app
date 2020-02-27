@@ -1,0 +1,31 @@
+form{
+  margin-top:5vh;
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+
+form input{
+  width:100%;
+  margin-bottom:28px;
+  border:none;
+  border-bottom:1px solid white;
+  background:none;
+  font-size:16px;
+  color:white;
+  outline:none;
+}
+
+form button{
+  border:none;
+  border-radius:80px;
+  padding:10px;
+  font-size:16px;
+  color:white;
+  background-color:#052137;
+  outline:none;
+}
+
+::placeholder{
+  color:white;
+}
