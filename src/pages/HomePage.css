@@ -1,0 +1,11 @@
+.home-page{ 
+  padding:0 9.18vw;
+}
+
+.home-page .habit{
+  background-color:#052137;
+  display:flex;
+  justify-content: space-evenly;
+  margin-bottom:10px;
+  border-radius: 10px;
+}
