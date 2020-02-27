@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './Form.css'
 
-function AddHabitForm(props){
+function AddDeleteHabitForm(props){
 
   const form = useState({})
 
@@ -20,4 +20,4 @@ function AddHabitForm(props){
   )
 }
 
-export default AddHabitForm
+export default AddDeleteHabitForm

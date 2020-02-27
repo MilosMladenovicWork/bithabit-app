@@ -1,20 +1,28 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {motion} from 'framer-motion'
 import DragPage from '../components/DragPage'
-import AddHabitForm from '../components/AddHabitForm'
+import AddDeleteHabitForm from '../components/AddDeleteHabitForm'
 import './HomePage.css'
 
 function HomePage(props){
 
-  const onTapStart = () => {
-    let dateClickStart = Date.now()
-    const checkTime = setInterval(() => {
-      if(Date.now() - dateClickStart > 1000){
-        window.alert('long press')
-        return clearInterval(checkTime)
-      }
-    }, 100)
-  }
+  const [startLongPress, setStartLongPress] = useState(false)
+  const [selected, setSelected] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  useEffect(() => {
+    let timer;
+    if(startLongPress){
+      timer = setTimeout(() =>{selectedItem.style.transform = 'scale(1.2)' ;setSelected(true);}, 1000)
+    }else{
+      clearTimeout(timer)
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [startLongPress, selectedItem])
+
 
   let habits = [
     {
@@ -32,7 +40,7 @@ function HomePage(props){
   ]
 
   const habitsArr = habits.map((habit, index) => {
-    return <motion.div onTapStart={onTapStart} whileTap={{scale:1.1}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
+    return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
       <p>{habit.icon}</p>
       <p>{habit.habit}</p>
       <p>{habit.done}</p>
@@ -40,7 +48,8 @@ function HomePage(props){
   })
 
   return(
-    <div className='home-page'>
+    <div className='home-page' onClick={() => 
+      setSelected(false)}>
       <h1 style={{color:"white"}}>Welcome, User!</h1>
       {habitsArr}
       <DragPage 
@@ -50,7 +59,7 @@ function HomePage(props){
         }}
       >
         <p>plus button</p>
-        <AddHabitForm/>
+        <AddDeleteHabitForm/>
       </DragPage>
     </div>
   )

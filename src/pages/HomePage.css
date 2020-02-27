@@ -1,5 +1,7 @@
 .home-page{ 
   padding:0 9.18vw;
+  height:72vh;
+  overflow-y: auto;
 }
 
 .home-page .habit{
