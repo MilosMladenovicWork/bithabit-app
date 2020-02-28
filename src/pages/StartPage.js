@@ -4,9 +4,11 @@ import LogInForm from '../components/LogInForm'
 import SignUpForm from '../components/SignUpForm'
 
 function StartPage(props){
+
   return(
     <div class='page'>
       <DragPage 
+          headerHeight={props.topConstraint && props.topConstraint.offsetHeight}
           style={{
             top:"67.5vh"
           }}
@@ -16,7 +18,8 @@ function StartPage(props){
           </p>
           <LogInForm/>
         </DragPage>
-        <DragPage 
+        <DragPage
+          headerHeight={props.topConstraint && props.topConstraint.offsetHeight} 
           style={{
             top:"80vh",
             backgroundColor:"#052137"

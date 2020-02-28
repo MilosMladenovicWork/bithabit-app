@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 import './Header.css'
 
 function Header(props){
+
+  const header = useRef()
+
+  useEffect(() => {
+    props.header(header)
+  }, [])
+
   return(
-    <header className='header'>
+    <header ref={header} className='header'>
       <svg
       xmlns="http://www.w3.org/2000/svg"
       width="83"

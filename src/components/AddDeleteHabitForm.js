@@ -12,9 +12,8 @@ function AddDeleteHabitForm(props){
 
   return(
     <form onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
-      <input type='text' name='username'  placeholder='Username' value={props.username} onChange={changeHandler}/>
-      <input type='email' name='email'  placeholder='Email' value={props.email} onChange={changeHandler}/>
-      <input type='password' name='password'  placeholder='Password' value={props.password} onChange={changeHandler}/>
+      <input type='text' name='habit'  placeholder='Habit' value={form.habit} onChange={changeHandler}/>
+      <textarea name='description' value={form.description} onChange={changeHandler} placeholder='Description'></textarea>
       <button type='submit'>Add</button>
     </form>
   )

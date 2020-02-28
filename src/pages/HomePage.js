@@ -65,6 +65,7 @@ function HomePage(props){
       {habitsArr}
       <DarkOverlay style={{display:selected ? 'block' : 'none'}}/>
       <DragPage 
+        headerHeight={props.topConstraint && props.topConstraint.offsetHeight}
         style={{
           top:"82.5vh",
           borderRadius:"10px"

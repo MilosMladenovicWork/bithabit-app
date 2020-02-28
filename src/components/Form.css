@@ -16,6 +16,19 @@ form input{
   outline:none;
 }
 
+form textarea{
+  width:100%;
+  min-height:20vh;
+  margin-bottom:28px;
+  border:none;
+  border-bottom:1px solid white;
+  background:none;
+  font-size:16px;
+  color:white;
+  outline:none;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
 form button{
   border:none;
   border-radius:80px;
