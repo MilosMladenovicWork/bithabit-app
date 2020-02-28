@@ -10,10 +10,15 @@ function HomePage(props){
   const [selected, setSelected] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
 
+  console.log(selectedItem)
+
   useEffect(() => {
     let timer;
     if(startLongPress){
-      timer = setTimeout(() =>{selectedItem.style.transform = 'scale(1.2)' ;setSelected(true);}, 1000)
+      if(selectedItem){
+        selectedItem.classList.remove('scaled')
+      }
+      timer = setTimeout(() =>{selectedItem.classList.add('scaled') ;setSelected(true);}, 300)
     }else{
       clearTimeout(timer)
     }
@@ -40,7 +45,7 @@ function HomePage(props){
   ]
 
   const habitsArr = habits.map((habit, index) => {
-    return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
+    return <motion.div data-num={index} whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
       <p>{habit.icon}</p>
       <p>{habit.habit}</p>
       <p>{habit.done}</p>

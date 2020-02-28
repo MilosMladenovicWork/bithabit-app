@@ -11,3 +11,7 @@
   margin-bottom:10px;
   border-radius: 10px;
 }
+
+.scaled{
+  transform:scale(1.2) !important;
+}
