@@ -4,6 +4,7 @@
   width:100vw;
   background-image:radial-gradient(#052137, #020308 150%);
   overflow:hidden;
+  position: relative;
 }
 
 .App p{
