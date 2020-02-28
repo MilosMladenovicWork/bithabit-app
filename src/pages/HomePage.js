@@ -51,7 +51,7 @@ function HomePage(props){
 
 
   const habitsArr = habits.map((habit, index) => {
-    return <motion.div data-num={index} whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
+    return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
       <p>{habit.icon}</p>
       <p>{habit.habit}</p>
       <p>{habit.done}</p>
