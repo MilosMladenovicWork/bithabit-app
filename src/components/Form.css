@@ -42,3 +42,18 @@ form button{
 ::placeholder{
   color:white;
 }
+
+form .swiper-container{
+  width:100%;
+  margin-bottom:28px;
+}
+
+form .swiper-slide{
+  transform:scale(0.8);
+  opacity:0.51;
+}
+
+form .swiper-slide-active{
+  transform:scale(1);
+  opacity:1;
+}
