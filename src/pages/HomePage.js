@@ -25,7 +25,7 @@ function HomePage(props){
       done:'true'
     }
   ]
-  
+
   useEffect(() => {
     let timer;
     if(startLongPress){
@@ -59,7 +59,7 @@ function HomePage(props){
   })
 
   return(
-    <div className='home-page' onClick={() => 
+    <div className='home-page' onMouseDown={() => 
       setSelected(false)}>
       <h1 style={{color:"white"}}>Welcome, User!</h1>
       {habitsArr}
@@ -70,8 +70,8 @@ function HomePage(props){
           borderRadius:"10px"
         }}
       >
-        <p>plus button</p>
-        <AddDeleteHabitForm/>
+        <p>{selected ? 'x' : 'plus'} button</p>
+        <AddDeleteHabitForm deleteAction={selected ? true : false}/>
       </DragPage>
     </div>
   )
