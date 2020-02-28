@@ -5,16 +5,22 @@ import './DragPage.css'
 function DragPage(props){
 
   const [topConstraint, setTopConstraint] = useState(0)
+  const [bottomConstraint, setBottomConstraint] = useState(0)
+  const [dragY, setDragY] = useState(0)
 
   const dragPage = useRef()
 
-  
   useEffect(() => {
-    if(props.headerHeight){
-      console.log(props.headerHeight)
+    if(dragY > -20){
+      setTopConstraint(0)
+    }else if(dragY < (- window.innerHeight + (window.innerHeight - dragPage.current.offsetTop + props.headerHeight)) + 20){
+      setBottomConstraint(- window.innerHeight + (window.innerHeight - dragPage.current.offsetTop + props.headerHeight))
+    }else{
+      setBottomConstraint(0)
+      setTopConstraint( - window.innerHeight + (window.innerHeight - dragPage.current.offsetTop + props.headerHeight))
     }
-    setTopConstraint( - window.innerHeight + (window.innerHeight - dragPage.current.offsetTop + props.headerHeight))
-  }, [props.headerHeight])
+
+  }, [props.headerHeight, topConstraint, bottomConstraint, dragY])
 
 
   return(
@@ -23,7 +29,10 @@ function DragPage(props){
       style={props.style}
       ref={dragPage}
       drag="y"
-      dragConstraints={{top:topConstraint, bottom:0}}
+      dragConstraints={{top:topConstraint, bottom:bottomConstraint}}
+      onDrag={
+        (event, info) => setDragY(info.point.y)
+      }
     >
       {props.children}
     </motion.div>

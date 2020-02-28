@@ -22,7 +22,7 @@ function StartPage(props){
           headerHeight={props.topConstraint && props.topConstraint.offsetHeight} 
           style={{
             top:"80vh",
-            backgroundColor:"#052137"
+            background:"linear-gradient(#052137, #000C16)"
           }}
         >
           <p style={{borderTop:"3px solid white",paddingTop:"10px"}}>

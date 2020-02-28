@@ -18,7 +18,7 @@ function Header(props){
       viewBox="0 0 83 57"
     >
       <text
-        fill="#f54bea"
+        fill="#C800BB"
         data-name="Bit Habit"
         fontFamily="Coda-Regular, Coda"
         fontSize="26"
