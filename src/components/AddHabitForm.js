@@ -4,7 +4,7 @@ import 'swiper/css/swiper.css'
 import './Form.css'
 import sampleImg from '../media/sample.svg'
 
-function AddDeleteHabitForm(props){
+function AddHabitForm(props){
 
   const [form,setForm] = useState({
       habit:'',
@@ -27,7 +27,7 @@ function AddDeleteHabitForm(props){
   }
 
   return(
-    <form onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
+    <form style={props.style} onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
       <Swiper {...swiperParams}>
         <img src={sampleImg}/>
         <img src={sampleImg}/>
@@ -44,4 +44,4 @@ function AddDeleteHabitForm(props){
   )
 }
 
-export default AddDeleteHabitForm
+export default AddHabitForm

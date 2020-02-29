@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {motion} from 'framer-motion'
 import DragPage from '../components/DragPage'
-import AddDeleteHabitForm from '../components/AddDeleteHabitForm'
+import AddHabitForm from '../components/AddHabitForm'
+import DeleteHabitForm from '../components/DeleteHabitForm'
 import DarkOverlay from '../components/DarkOverlay'
 import './HomePage.css'
 
@@ -19,7 +20,7 @@ function HomePage(props){
     },
     {
       icon:'brackets',
-      habit:'Refactor Code',
+      habit:'Write Code',
       description:'Clean code for 15 minutes a day',
       done:true
     }
@@ -71,12 +72,20 @@ function HomePage(props){
       ]      
     })
   }
+
+  const deleteHabit = (title) => {
+    setHabits(function(prevState){
+      let newArr = prevState.filter((habit) => habit.habit !== title)
+      console.log(newArr)
+      return newArr;
+    })
+  } 
   
   useEffect(() => {
     setHabitsArr(habits.map((habit, index) => {
       return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done ? 0.4 : 1}}>
         <p>{habit.icon}</p>
-        <p>{habit.habit}</p>
+        <p class='habit-name'>{habit.habit}</p>
         <p onMouseDown={() => doHandler(index)}>{habit.done ? 'true' : 'false'}</p>
       </motion.div>
     }))
@@ -84,11 +93,10 @@ function HomePage(props){
 
 
   return(
-    <div className='home-page' onMouseDown={() => 
-      setSelected(false)}>
+    <div className='home-page'>
       <h1 style={{color:"white"}}>Welcome, User!</h1>
       {habitsArr}
-      <DarkOverlay style={{display:selected ? 'block' : 'none'}}/>
+      <DarkOverlay setSelected={setSelected} style={{display:selected ? 'block' : 'none'}}/>
       <DragPage 
         headerHeight={props.topConstraint && props.topConstraint.offsetHeight}
         style={{
@@ -96,7 +104,8 @@ function HomePage(props){
         }}
       >
         <p>{selected ? 'x' : 'plus'} button</p>
-        <AddDeleteHabitForm deleteAction={selected ? true : false} createHabit={createHabit}/>
+        <AddHabitForm style={{display: selected ? 'none':'flex'}} createHabit={createHabit}/>
+        <DeleteHabitForm style={{display: selected ? 'flex':'none'}} selectedNote={selectedItem && selectedItem.querySelector('.habit-name').innerText} deleteHabit={deleteHabit}/>
       </DragPage>
     </div>
   )
