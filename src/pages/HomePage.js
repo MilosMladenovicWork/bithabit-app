@@ -25,6 +25,7 @@ function HomePage(props){
     }
   ])
   const [habitsArr, setHabitsArr] = useState()
+  const [newHabit, setNewHabit] = useState()
 
   useEffect(() => {
     let timer;
@@ -56,13 +57,27 @@ function HomePage(props){
     }  
     )
   }
+
+  const createHabit = (form) => {
+    setHabits(function(prevState){
+      return [
+        ...prevState,
+        {
+          icon:'hey',
+          habit:form.habit,
+          description:form.description,
+          completed:false
+        }
+      ]      
+    })
+  }
   
   useEffect(() => {
     setHabitsArr(habits.map((habit, index) => {
       return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done ? 0.4 : 1}}>
         <p>{habit.icon}</p>
         <p>{habit.habit}</p>
-        <p onClick={() => doHandler(index)}>{habit.done ? 'true' : 'false'}</p>
+        <p onMouseDown={() => doHandler(index)}>{habit.done ? 'true' : 'false'}</p>
       </motion.div>
     }))
   }, [habits])
@@ -81,7 +96,7 @@ function HomePage(props){
         }}
       >
         <p>{selected ? 'x' : 'plus'} button</p>
-        <AddDeleteHabitForm deleteAction={selected ? true : false}/>
+        <AddDeleteHabitForm deleteAction={selected ? true : false} createHabit={createHabit}/>
       </DragPage>
     </div>
   )

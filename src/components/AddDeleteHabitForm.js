@@ -6,7 +6,10 @@ import sampleImg from '../media/sample.svg'
 
 function AddDeleteHabitForm(props){
 
-  const form = useState({})
+  const [form,setForm] = useState({
+      habit:'',
+      description:''
+    })
 
   const swiperParams = {
     slidesPerView:3,
@@ -15,8 +18,11 @@ function AddDeleteHabitForm(props){
     centeredSlides:true
   }
 
-
   const changeHandler = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
     form[e.target.name] = e.target.value
   }
 
@@ -30,7 +36,10 @@ function AddDeleteHabitForm(props){
       </Swiper>
       <input type='text' name='habit'  placeholder='Habit' value={form.habit} onChange={changeHandler}/>
       <textarea name='description' value={form.description} onChange={changeHandler} placeholder='Description'></textarea>
-      <button type='submit'>Add</button>
+      <button type='submit' onMouseDown={() => {props.createHabit(form);setForm({
+        habit:'',
+        description:''
+      })}}>Add</button>
     </form>
   )
 }
