@@ -10,21 +10,21 @@ function HomePage(props){
   const [startLongPress, setStartLongPress] = useState(false)
   const [selected, setSelected] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
-  
-  let habits = [
+  const [habits, setHabits] = useState([
     {
       icon:'brackets',
       habit:'Refactor Code',
       description:'Clean code for 15 minutes a day',
-      done:'false'
+      done:false
     },
     {
       icon:'brackets',
       habit:'Refactor Code',
       description:'Clean code for 15 minutes a day',
-      done:'true'
+      done:true
     }
-  ]
+  ])
+  const [habitsArr, setHabitsArr] = useState()
 
   useEffect(() => {
     let timer;
@@ -48,15 +48,25 @@ function HomePage(props){
     }
   }, [selected])
 
+  const doHandler = (index) => {
+    setHabits( function(prevState) {
+      let newArr = [...prevState]
+      newArr[index].done = !prevState[index].done  
+      return newArr
+    }  
+    )
+  }
+  
+  useEffect(() => {
+    setHabitsArr(habits.map((habit, index) => {
+      return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done ? 0.4 : 1}}>
+        <p>{habit.icon}</p>
+        <p>{habit.habit}</p>
+        <p onClick={() => doHandler(index)}>{habit.done ? 'true' : 'false'}</p>
+      </motion.div>
+    }))
+  }, [habits])
 
-
-  const habitsArr = habits.map((habit, index) => {
-    return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done === 'true' ? 0.4 : 1}}>
-      <p>{habit.icon}</p>
-      <p>{habit.habit}</p>
-      <p>{habit.done}</p>
-    </motion.div>
-  })
 
   return(
     <div className='home-page' onMouseDown={() => 
@@ -67,8 +77,7 @@ function HomePage(props){
       <DragPage 
         headerHeight={props.topConstraint && props.topConstraint.offsetHeight}
         style={{
-          top:"82.5vh",
-          borderRadius:"10px"
+          top:"82.5vh"
         }}
       >
         <p>{selected ? 'x' : 'plus'} button</p>
