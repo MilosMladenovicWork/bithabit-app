@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import Swiper from 'react-id-swiper'
 import 'swiper/css/swiper.css'
 import './Form.css'
@@ -7,9 +7,26 @@ import sampleImg from '../media/sample.svg'
 function AddHabitForm(props){
 
   const [form,setForm] = useState({
+      icon:'',
       habit:'',
       description:''
     })
+  const [swiper, setSwiper] = useState(null)
+
+  const formRef = useRef()
+  
+
+  useEffect(()=>{
+      if(formRef.current){
+        setForm({
+          ...form,
+          'icon':formRef.current.querySelector('.swiper-slide-active').attributes.src
+        })
+
+      }
+  },[swiper])
+
+  
 
   const swiperParams = {
     slidesPerView:3,
@@ -23,12 +40,11 @@ function AddHabitForm(props){
       ...form,
       [e.target.name]: e.target.value
     })
-    form[e.target.name] = e.target.value
   }
 
   return(
-    <form style={props.style} onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
-      <Swiper {...swiperParams}>
+    <form ref={formRef} style={props.style} onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
+      <Swiper {...swiperParams} getSwiper={setSwiper}>
         <img src={sampleImg}/>
         <img src={sampleImg}/>
         <img src={sampleImg}/>
