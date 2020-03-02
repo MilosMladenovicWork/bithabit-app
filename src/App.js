@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Switch, Route} from 'react-router-dom'
 import Header from './components/Header'
 import StartPage from './pages/StartPage'
 import HomePage from './pages/HomePage'
@@ -17,8 +18,10 @@ function App() {
   return (
     <div className="App">
       <Header header={header}/>
-      <HomePage topConstraint={headerRef}/>
-      {/* <StartPage topConstraint={headerRef}/> */}
+      <Switch>
+        <Route exact path='/' component={() => <StartPage topConstraint={headerRef}/>}/>
+        <Route exact path='/home' component={() => <HomePage topConstraint={headerRef}/>}/>
+      </Switch>
     </div>
   );
 }
