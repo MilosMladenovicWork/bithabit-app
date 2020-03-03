@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react'
-import {motion} from "framer-motion"
+import {motion, useAnimation} from "framer-motion"
 import './DragPage.css'
 
 function DragPage(props){
@@ -7,6 +7,8 @@ function DragPage(props){
   const [topConstraint, setTopConstraint] = useState(0)
   const [bottomConstraint, setBottomConstraint] = useState(0)
   const [dragY, setDragY] = useState(0)
+  const [upperPosition, setUpperPosition] = useState(0)
+  const controls = useAnimation()
 
   const dragPage = useRef()
 
@@ -22,9 +24,13 @@ function DragPage(props){
 
   }, [props.headerHeight, topConstraint, bottomConstraint, dragY])
 
+  useEffect(() => {
+    setUpperPosition((- window.innerHeight + (window.innerHeight - dragPage.current.offsetTop + props.headerHeight)))
+  }, [dragPage])
 
+  
   return(
-    <motion.div 
+    <motion.div
       className='drag-page'
       style={props.style}
       ref={dragPage}

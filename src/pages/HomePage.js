@@ -11,6 +11,7 @@ function HomePage(props){
   const [startLongPress, setStartLongPress] = useState(false)
   const [selected, setSelected] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
+  const [habitsArr, setHabitsArr] = useState()
   const [habits, setHabits] = useState([
     {
       icon:'brackets',
@@ -25,9 +26,7 @@ function HomePage(props){
       done:true
     }
   ])
-  const [habitsArr, setHabitsArr] = useState()
-  const [newHabit, setNewHabit] = useState()
-
+  
   useEffect(() => {
     let timer;
     if(startLongPress){
@@ -58,7 +57,7 @@ function HomePage(props){
     }  
     )
   }
-
+  
   const createHabit = (form) => {
     setHabits(function(prevState){
       return [
@@ -76,7 +75,6 @@ function HomePage(props){
   const deleteHabit = (title) => {
     setHabits(function(prevState){
       let newArr = prevState.filter((habit) => habit.habit !== title)
-      console.log(newArr)
       return newArr;
     })
   } 
@@ -91,7 +89,6 @@ function HomePage(props){
     }))
   }, [habits])
 
-
   return(
     <div className='home-page'>
       <h1 style={{color:"white"}}>Welcome, User!</h1>
@@ -99,7 +96,7 @@ function HomePage(props){
       {habitsArr}
 
       <DarkOverlay setSelected={setSelected} style={{display:selected ? 'block' : 'none'}}/>
-      <DragPage 
+      <DragPage
         headerHeight={props.topConstraint && props.topConstraint.offsetHeight}
         style={{
           top:"82.5vh"
