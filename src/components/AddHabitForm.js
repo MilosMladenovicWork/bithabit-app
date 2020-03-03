@@ -42,6 +42,16 @@ function AddHabitForm(props){
     })
   }
 
+  const addHabit = () => {
+    if(form.habit !== ''){
+      props.createHabit(form)
+      setForm({
+        habit:'',
+        description:''
+      })
+    }
+  }
+
   return(
     <form ref={formRef} style={props.style} onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
       <Swiper {...swiperParams} getSwiper={setSwiper}>
@@ -52,10 +62,7 @@ function AddHabitForm(props){
       </Swiper>
       <input type='text' name='habit'  placeholder='Habit' value={form.habit} onChange={changeHandler}/>
       <textarea name='description' value={form.description} onChange={changeHandler} placeholder='Description'></textarea>
-      <button type='submit' onMouseDown={() => {props.createHabit(form);setForm({
-        habit:'',
-        description:''
-      })}}>Add</button>
+      <button type='submit' onMouseDown={addHabit}>Add</button>
     </form>
   )
 }
