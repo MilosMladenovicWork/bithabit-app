@@ -3,6 +3,8 @@ import Swiper from 'react-id-swiper'
 import 'swiper/css/swiper.css'
 import './Form.css'
 import sampleImg from '../media/sample.svg'
+import sampleImg1 from '../media/sample1.svg'
+import sampleImg2 from '../media/sample2.svg'
 
 function AddHabitForm(props){
 
@@ -12,27 +14,37 @@ function AddHabitForm(props){
       description:''
     })
   const [swiper, setSwiper] = useState(null)
-
+  
   const formRef = useRef()
   
 
   useEffect(()=>{
       if(formRef.current){
-        setForm({
-          ...form,
-          'icon':formRef.current.querySelector('.swiper-slide-active').attributes.src
-        })
+        
 
       }
   },[swiper])
-
   
 
   const swiperParams = {
     slidesPerView:3,
     spaceBetween: 30,
     loop:true,
-    centeredSlides:true
+    centeredSlides:true,
+    on:{
+      'init':function(){
+        setForm({
+          ...form,
+          'icon':this.slides[this.activeIndex].src
+        })
+      },
+      'slideChange':function(){
+        setForm({
+          ...form,
+          'icon':this.slides[this.activeIndex].src
+        })
+      }
+    }
   }
 
   const changeHandler = (e) => {
@@ -56,9 +68,8 @@ function AddHabitForm(props){
     <form ref={formRef} style={props.style} onSubmit={(e) => e.preventDefault()} className='form' method='POST' action={props.action || "#"}>
       <Swiper {...swiperParams} getSwiper={setSwiper}>
         <img src={sampleImg}/>
-        <img src={sampleImg}/>
-        <img src={sampleImg}/>
-        <img src={sampleImg}/>
+        <img src={sampleImg1}/>
+        <img src={sampleImg2}/>
       </Swiper>
       <input type='text' name='habit'  placeholder='Habit' value={form.habit} onChange={changeHandler}/>
       <textarea name='description' value={form.description} onChange={changeHandler} placeholder='Description'></textarea>

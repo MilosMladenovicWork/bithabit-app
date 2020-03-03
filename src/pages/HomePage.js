@@ -64,7 +64,7 @@ function HomePage(props){
       return [
         ...prevState,
         {
-          icon:'hey',
+          icon:form.icon,
           habit:form.habit,
           description:form.description,
           completed:false
@@ -84,7 +84,7 @@ function HomePage(props){
   useEffect(() => {
     setHabitsArr(habits.map((habit, index) => {
       return <motion.div whileTap={{scale:1.1}} onTap={()=>setStartLongPress(false)} onTapStart={(e)=>{setStartLongPress(true);setSelectedItem(e.currentTarget)}} key={index} className='habit' style={{opacity:habit.done ? 0.4 : 1}}>
-        <p>{habit.icon}</p>
+        <img className='icon' src={habit.icon}/>
         <p class='habit-name'>{habit.habit}</p>
         <p onMouseDown={() => doHandler(index)}>{habit.done ? 'true' : 'false'}</p>
       </motion.div>
@@ -95,7 +95,9 @@ function HomePage(props){
   return(
     <div className='home-page'>
       <h1 style={{color:"white"}}>Welcome, User!</h1>
+
       {habitsArr}
+
       <DarkOverlay setSelected={setSelected} style={{display:selected ? 'block' : 'none'}}/>
       <DragPage 
         headerHeight={props.topConstraint && props.topConstraint.offsetHeight}

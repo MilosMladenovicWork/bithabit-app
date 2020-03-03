@@ -7,7 +7,8 @@
 .home-page .habit{
   background-color:#052137;
   display:flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom:10px;
   border-radius: 10px;
   position:relative;
@@ -16,6 +17,15 @@
    -khtml-user-select: none; /* Konqueror HTML */
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.home-page .habit .icon{
+  margin-left:15px;
+  height:48px;
+}
+
+.home-page .habit p:last-child{
+  margin-right:15px;
 }
 
 .scaled{
