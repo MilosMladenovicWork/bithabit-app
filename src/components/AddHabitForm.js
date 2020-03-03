@@ -33,15 +33,19 @@ function AddHabitForm(props){
     centeredSlides:true,
     on:{
       'init':function(){
-        setForm({
-          ...form,
-          'icon':this.slides[this.activeIndex].src
+        setForm((prevState) =>{
+          return {
+            ...prevState,
+            'icon':this.slides[this.activeIndex].src
+          }
         })
       },
       'slideChange':function(){
-        setForm({
-          ...form,
-          'icon':this.slides[this.activeIndex].src
+        setForm((prevState) =>{
+          return {
+            ...prevState,
+            'icon':this.slides[this.activeIndex].src
+          }
         })
       }
     }
